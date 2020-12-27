@@ -145,9 +145,9 @@ export class DevicesInterceptors implements HttpInterceptor {
     this.data = DATA;
   }
 
-  delay(ms: number): Promise {
-    return new Promise( resolve => setTimeout(resolve, ms));
-  }
+  // delay(ms: number): Promise {
+  //   return new Promise( resolve => setTimeout(resolve, ms));
+  // }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // console.log("prueba interceptor deviceList");

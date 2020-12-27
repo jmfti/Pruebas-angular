@@ -22,7 +22,7 @@ export class DevicesService {
 
   }
 
-  async getDevicesBySerialNumber(serialNumber: string) {
+  async getDevicesBySerialNumber(serialNumber: string): Promise<any> {
     let res = this.http.post(environment.deviceServiceUri + '/getDeviceBySerialNumber',
       {
         'serialNumber': serialNumber,

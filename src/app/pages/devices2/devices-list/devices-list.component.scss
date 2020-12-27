@@ -1,0 +1,28 @@
+@import '../../../@theme/styles/themes';
+
+$left-color: nb-theme(color-success-100);
+$right-color: nb-theme(color-success-300);
+
+@include nb-install-component() {
+  nb-list-item {
+    //$left-color: nb-theme(button-hero-#{$status}-left-background-color);
+    //$right-color: nb-theme(button-hero-#{$status}-right-background-color);
+    //background-image: linear-gradient(to right, $left-color, $right-color);
+
+    //$left-color: nb-theme(color-success-100);
+    //$right-color: nb-theme(color-success-300);
+    //background-image: linear-gradient(to right, $left-color, $right-color);
+    //background-color: nb-theme(color-basic-hover);
+    &:hover {
+      //$left-hover-color: nb-theme(button-hero-#{$status}-hover-left-background-color);
+      //$right-hover-color: nb-theme(button-hero-#{$status}-hover-right-background-color);
+      //background-image: linear-gradient(to right, $left-hover-color, $right-hover-color);
+
+      //$new-left: nb-theme(color-success-100);
+      //$new-right: nb-theme(color-success-700);
+      //background-image: linear-gradient(to right, $new-left, $new-right);
+      cursor: pointer;
+      background-color: nb-theme(text-disabled-color);
+    }
+  }
+}

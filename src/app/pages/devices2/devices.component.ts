@@ -4,6 +4,7 @@ import {Input, Output, EventEmitter} from '@angular/core';
 import {AfterViewInit, ViewChild} from '@angular/core';
 import {DevicesSearchComponent} from './devices-search/devices-search.component';
 import { DevicesListComponent } from "./devices-list/devices-list.component";
+import {NbStepperComponent} from "@nebular/theme";
 
 @Component({
   selector: 'app-devices',
@@ -18,8 +19,10 @@ export class DevicesComponent implements OnInit {
   @ViewChild(DevicesListComponent)
   private devicesListComponent: DevicesListComponent;
 
-  devicesRes = [];
+  @ViewChild(NbStepperComponent)
+  private nbStepperComponent: NbStepperComponent;
 
+  devicesRes = [];
   loading = false;
 
   constructor(private devicesService: DevicesService) {
@@ -40,11 +43,13 @@ export class DevicesComponent implements OnInit {
 
   async searchDevice(serialNumber): Promise<boolean> {
     this.setLoading(true);
-    const res = await this.devicesService.getDevicesBySerialNumber(serialNumber);
+    let res = await this.devicesService.getDevicesBySerialNumber(serialNumber);
     console.log(res);
     this.setLoading(false);
     // console.log(JSON.stringify(res));
     this.devicesRes = res;
+    // this.nextEvent.emit("asdmasd");
+    this.nbStepperComponent.next();
     return true;
   }
 
@@ -55,6 +60,6 @@ export class DevicesComponent implements OnInit {
   }
 
   deviceSelected(cpe){
-    console.log(JSON.stringify(cpe));
+    this.nbStepperComponent.next();
   }
 }

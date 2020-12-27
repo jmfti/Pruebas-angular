@@ -1,4 +1,20 @@
-<devices-search (searchDevice)="searchDevice($event)"></devices-search>
-<devices-list [(cpes)]="devicesRes" (deviceSelected)="deviceSelected($event)" ></devices-list>
+<nb-card size="medium" linear="true">
+  <nb-card-body>
+    <nb-stepper orientation="vertical">
+      <nb-step label="First step">
+        <devices-search (searchDevice)="searchDevice($event)"></devices-search>
+      </nb-step>
+      <nb-step label="Second step">
+        <devices-list [(cpes)]="devicesRes" (deviceSelected)="deviceSelected($event)" ></devices-list>
+      </nb-step>
+      <nb-step label="Third step">
+        <devices-profile></devices-profile>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>
+
+
+
 
 <router-outlet></router-outlet>
