@@ -17,7 +17,7 @@ import {
   NbSelectModule,
   NbUserModule,
   NbSpinnerModule,
-  NbListModule, NbStepperModule,
+  NbListModule, NbStepperModule, NbLayoutModule, NbTabsetModule,
 } from '@nebular/theme';
 import { DevicesListComponent } from './devices-list/devices-list.component';
 import { DevicesProfileComponent } from './devices-profile/devices-profile.component';
@@ -42,6 +42,8 @@ import { DevicesProfileComponent } from './devices-profile/devices-profile.compo
     NbListModule,
     FormsModule,
     NbStepperModule,
+    NbLayoutModule,
+    NbTabsetModule,
   ],
 })
 export class DevicesModule {

@@ -1,14 +1,16 @@
-<nb-card size="medium" linear="true">
+<nb-card size="medium" linear="true" [(nbSpinner)]="loading" nbSpinnerStatus="danger"
+         nbSpinnerSize="giant"
+         nbSpinnerMessage="">
   <nb-card-body>
-    <nb-stepper orientation="vertical">
-      <nb-step label="First step">
+    <nb-stepper orientation="horizontal">
+      <nb-step label="Busqueda">
         <devices-search (searchDevice)="searchDevice($event)"></devices-search>
       </nb-step>
-      <nb-step label="Second step">
+      <nb-step label="Listado">
         <devices-list [(cpes)]="devicesRes" (deviceSelected)="deviceSelected($event)" ></devices-list>
       </nb-step>
-      <nb-step label="Third step">
-        <devices-profile></devices-profile>
+      <nb-step label="Dispositivo">
+        <devices-profile [(cpe)]="cpe"></devices-profile>
       </nb-step>
     </nb-stepper>
   </nb-card-body>

@@ -25,6 +25,20 @@ export class DevicesComponent implements OnInit {
   devicesRes = [];
   loading = false;
 
+  cpe = {
+    serialNumber: '',
+    macAddress: '',
+    lastConnected: '',
+    connected: false,
+    model: '',
+    firmware: '',
+    interfaces: [],
+    imagen: 'https://www.respuestasbc.com/wp-content/uploads/2019/06/asdasd.png',
+    clientId: '',
+    serviceId: '',
+    ip: '',
+  };
+
   constructor(private devicesService: DevicesService) {
   }
 
@@ -61,5 +75,6 @@ export class DevicesComponent implements OnInit {
 
   deviceSelected(cpe){
     this.nbStepperComponent.next();
+    this.cpe = cpe;
   }
 }

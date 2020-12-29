@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'devices-profile',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevicesProfileComponent implements OnInit {
 
+  debug = "";
+
+  @Input()
+  cpe: any;
+  @Output()
+  cpeChanged = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit(): void {
+    // this.cpe = this.nullCpe;
   }
 
 }

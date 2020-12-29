@@ -1,11 +1,11 @@
 
 
-<nb-card size="small" [(nbSpinner)]="loading" status="primary">
+<nb-card size="medium" [(nbSpinner)]="loading" status="primary">
   <nb-card-header>
-    Dispositivos encontrados
+    Devices found
   </nb-card-header>
   <nb-list>
-    <nb-list-item *ngFor="let cpe of cpes" (click)="deviceSelected.emit(cpe)" (ngMouseover)="this.nativeElement">
+    <nb-list-item *ngFor="let cpe of cpes" (click)="deviceSelected.emit(cpe)">
       <div class="col-md-4"> {{ cpe.serialNumber}}</div>
       <div class="col-md-4"> {{ cpe.macAddress}}</div>
       <div class="col-md-4"> {{ cpe.clientId}}</div>

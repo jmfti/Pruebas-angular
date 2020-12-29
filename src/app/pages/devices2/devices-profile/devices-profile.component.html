@@ -1,1 +1,91 @@
-<p>devices-profile works!</p>
+<nb-card status="primary">
+  <nb-card-header>Device profile</nb-card-header>
+  <nb-card-body>
+    <div class="container">
+      <div class="row show-grid">
+        <div class="col-6 col-md-4 show-grid">
+          <img [src]="cpe.imagen" class="img-thumbnail"/>
+        </div>
+        <div class="col-12 col-md-8 show-grid">
+          <nb-card status="primary">
+            <nb-card-header>Propiedades</nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>IP:</b></span><span class="float-right">{{ cpe.ip }}</span><br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>MODEL:</b></span><span class="float-right">{{ cpe.model | uppercase }}</span><br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>FIRMWARE:</b></span><span class="float-right">{{ cpe.firmware | uppercase }}</span><br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>SERIAL NUMBER:</b></span><span class="float-right">{{ cpe.serialNumber | uppercase }}</span><br>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>SERVICE ID:</b></span><span class="float-right">{{ cpe.serviceId | uppercase }}</span><br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>CLIENT ID:</b></span><span class="float-right">{{ cpe.clientId | uppercase }}</span><br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span style="float:left"><b>LAST CONNECTED:</b></span><span class="float-right">{{ cpe.lastConnected | uppercase }}</span><br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+      <div class="row show-grid">
+        <div class="col-md-12">
+
+          <nb-tabset>
+            <nb-tab tabTitle="Wifi" tabIcon="wifi-outline">
+              Tab content 1
+            </nb-tab>
+            <nb-tab tabTitle="VoIP" tabIcon="phone-outline">
+              Tab content 2
+            </nb-tab>
+            <nb-tab tabTitle="LAN" tabIcon="swap-outline">
+              Tab content 2
+            </nb-tab>
+            <nb-tab tabTitle="WAN" tabIcon="globe-outline">
+              Tab content 2
+            </nb-tab>
+            <nb-tab tabTitle="Metrics" tabIcon="bar-chart-outline">
+              Tab content 2
+            </nb-tab>
+            <nb-tab tabTitle="System" tabIcon="cube-outline">
+              Tab content 2
+            </nb-tab>
+            <nb-tab tabTitle="Logs" tabIcon="menu-outline">
+              Tab content 2
+            </nb-tab>
+          </nb-tabset>
+
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>{{ debug }}</nb-card-footer>
+</nb-card>
