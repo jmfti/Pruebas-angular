@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of, from} from 'rxjs';
 
 
+
 const DATA = [
   {
     serialNumber: 'adsa8da98sdn',
@@ -89,6 +90,10 @@ export class DevicesInterceptors implements HttpInterceptor {
       console.log('getDeviceBySerialNumber matchea');
       return this.getDeviceBySerialNumber(req);
     }
+
+    if (req.url.search('/setWifi') > -1){
+      return this.setWifi(req);
+    }
     return next.handle(req);
   }
 
@@ -104,6 +109,24 @@ export class DevicesInterceptors implements HttpInterceptor {
         },
       ),
     );
+  }
+
+  setWifi(req: HttpRequest<any>): Observable<HttpEvent<any>> {
+
+    return from(new Promise<any>(resolve => {
+      setTimeout( () => {
+        resolve(
+          new HttpResponse({
+            status: 200,
+            body: {
+              result: "ok",
+              warnings: [],
+              errors: [],
+            },
+          }),
+        );
+      }, 3000);
+    }));
   }
 
   // searchDevice(req: HttpRequest<any>): Observable<HttpEvent<any>> {

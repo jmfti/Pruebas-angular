@@ -17,14 +17,15 @@ import {
   NbSelectModule,
   NbUserModule,
   NbSpinnerModule,
-  NbListModule, NbStepperModule, NbLayoutModule, NbTabsetModule,
+  NbListModule, NbStepperModule, NbLayoutModule, NbTabsetModule, NbToggleModule, NbPopoverModule,
 } from '@nebular/theme';
 import { DevicesListComponent } from './devices-list/devices-list.component';
 import { DevicesProfileComponent } from './devices-profile/devices-profile.component';
+import { DevicesWifiComponent } from './devices-wifi/devices-wifi.component';
 
 
 @NgModule({
-  declarations: [DevicesComponent, DevicesSearchComponent, DevicesListComponent, DevicesProfileComponent],
+  declarations: [DevicesComponent, DevicesSearchComponent, DevicesListComponent, DevicesProfileComponent, DevicesWifiComponent],
   imports: [
     CommonModule,
     DevicesRoutingModule,
@@ -44,6 +45,8 @@ import { DevicesProfileComponent } from './devices-profile/devices-profile.compo
     NbStepperModule,
     NbLayoutModule,
     NbTabsetModule,
+    NbToggleModule,
+    NbPopoverModule,
   ],
 })
 export class DevicesModule {

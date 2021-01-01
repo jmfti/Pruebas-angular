@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {DevicesWifiComponent} from "../devices-wifi/devices-wifi.component";
 
 @Component({
   selector: 'devices-profile',
@@ -14,10 +15,13 @@ export class DevicesProfileComponent implements OnInit {
   @Output()
   cpeChanged = new EventEmitter<any>();
 
+  @ViewChild(DevicesWifiComponent)
+  private devicesWifi;
+
   constructor() { }
 
   ngOnInit(): void {
-    // this.cpe = this.nullCpe;
+
   }
 
 }

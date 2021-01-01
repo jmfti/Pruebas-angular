@@ -1,0 +1,28 @@
+<div [(nbSpinner)]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary">
+  <div class="col-md-2">
+    <nb-toggle status="primary" [(checked)]="enableWifi" >On/off</nb-toggle>
+  </div>
+  <div class="col-md-10" >
+    <nb-card status="primary" [hidden]="!enableWifi">
+      <nb-card-header>Wifi configuration</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-md-1">Wifi name</div><div class="col-md-5"><input type="text" nbInput [(ngModel)]="wifiName" fullWidth=true/> </div>
+          <div class="col-md-1">Encryption</div>
+          <div class="col-md-5">
+            <nb-select [selected]="encrypt">
+              <nb-option value="AES">AES</nb-option>
+              <nb-option value="WPA-PSK2">WPA-PSK2</nb-option>
+            </nb-select>
+          </div>
+          <div class="col-md-1">Password</div><div class="col-md-5"><input type="password" nbInput [(ngModel)]="password" fullWidth=true/> </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div style="float:right">
+          <button nbButton status="primary" (click)="send()">Send</button>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>

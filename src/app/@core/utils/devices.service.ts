@@ -33,6 +33,12 @@ export class DevicesService {
 
   }
 
+  async setWifi(wifi: any){
+    let res = this.http.post(environment.deviceServiceUri + '/setWifi',
+      { wifi }).toPromise();
+    return res;
+  }
+
   async getCpesModels() {
     const newData = await this.getDevicesList();
     const models = new Set();
