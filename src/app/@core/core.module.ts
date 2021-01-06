@@ -13,6 +13,7 @@ import { MockDataModule } from './mock/mock-data.module';
 import { DevicesService } from './utils/devices.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { DevicesInterceptors } from "./mock/devices-interceptors";
+import {GenericHttpInterceptor} from "./mock/generic-http-interceptor";
 
 
 
@@ -101,6 +102,11 @@ export const NB_CORE_PROVIDERS = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: DevicesInterceptors,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GenericHttpInterceptor,
       multi: true,
     },
   ]

@@ -48,6 +48,17 @@ export class DevicesService {
     return models;
   }
 
+  async getMetrics(cpe){
+
+    let res = this.http.post(environment.deviceServiceUri + '/getMetrics',
+      {
+        'serialNumber': cpe.serialNumber,
+        macAddress: '',
+        serviceId: '',
+      }).toPromise();
+    return res;
+  }
+
   // async getCpeBySerialNumber(serialNumber: string) {
   //
   //   const newData = await this.getDevicesList();

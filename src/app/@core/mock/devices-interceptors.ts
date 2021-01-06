@@ -149,6 +149,8 @@ export class DevicesInterceptors implements HttpInterceptor {
   //   );
   // }
 
+
+
   getDeviceBySerialNumber(req: HttpRequest<any>): Observable<HttpEvent<any>> {
 
     const query = req.body;
