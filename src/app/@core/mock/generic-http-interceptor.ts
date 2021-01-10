@@ -10,6 +10,21 @@ export class GenericHttpInterceptor implements HttpInterceptor {
 
   }
 
+  met = {
+    snr: {
+      down: 15,
+      up: 17,
+    },
+    att: {
+      down: 5,
+      up: 9,
+    },
+    power: {
+      up: 75,
+      down: 80,
+    }
+  };
+
   interfaces = ["getMetrics"];
 
   // delay(ms: number): Promise {
@@ -35,38 +50,46 @@ export class GenericHttpInterceptor implements HttpInterceptor {
   }
 
   getMetrics(req: HttpRequest<any>){
-    return {
-      snr: {
-        down: 15,
-        up: 17,
-      },
-      att: {
-        down: 5,
-        up: 9,
-      },
-      power: {
-        up: 75,
-        down: 80,
-      }
-    };
-  }
+    // console.log("devolviendo metricas");
+    this.met.snr.up = 2 * Math.sin(200 * (Date.now() / 1000)) + 15;
+    this.met.snr.down = 2 * Math.sin(215 * (Date.now() / 1000)) + 17;
+    this.met.att.up = 2 * Math.sin(190 * (Date.now() / 1000)) + 5;
+    this.met.att.down = 2 * Math.sin(213 * (Date.now() / 1000)) + 9;
+    this.met.power.up = 2 * Math.sin(201 * (Date.now() / 1000)) + 75;
+    this.met.power.down = 2 * Math.sin(203 * (Date.now() / 1000)) + 80;
 
-  getDevices(req: HttpRequest<any>): Observable<HttpEvent<any>> {
 
-    return of(
-      new HttpResponse(
-        {
-          status: 200,
-          body: this.data,
-        },
-      ),
-    );
+    return this.met;
   }
 
   wrapResponse(data): Observable<HttpEvent<any>> {
-    return of(new HttpResponse({
-      status: 200,
-      body: data
-    }));
+    console.log("devolviendo observable de data : " + JSON.stringify(data));
+    return from(
+      new Promise<any>( resolve => {
+        setTimeout( () => {
+          resolve(
+            new HttpResponse( {
+              status:200,
+              body:data,
+            })
+          );
+        }, 200);
+      })
+    );
+
+    // return from( new Promise(resolve => {
+    //   setTimeout( () => {
+    //     resolve(
+    //       new HttpResponse({
+    //         status: 200,
+    //         body: data,
+    //       })
+    //     );
+    //   }, 100);
+    // }));
+    // return of(new HttpResponse({
+    //   status: 200,
+    //   body: data
+    // }));
   }
 }

@@ -1,0 +1,57 @@
+<div class="row" [(nbSpinner)]="loading">
+  <div class="col-md-6">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <span class="font-weight-bold" style="float:left">SNR up:</span><span
+          [ngClass]="metrics.snr.up > 14 ? 'text-success' : 'text-danger'"
+          style="float:right">{{ metrics.snr.up | number:'1.2-2'}}</span><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span style="float:left"><b>SNR dw:</b></span><span
+          [ngClass]="metrics.snr.down > 14 ? 'text-success' : 'text-danger'"
+          style="float:right">{{ metrics.snr.down | number:'1.2-2' }}</span><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span style="float:left"><b>ATT up:</b></span><span
+          [ngClass]="metrics.att.up < 5 ? 'text-success' : 'text-danger'"
+          style="float:right">{{ metrics.att.up | number:'1.2-2' }}</span><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span style="float:left"><b>ATT dw:</b></span><span
+          [ngClass]="metrics.att.down < 5 ? 'text-success' : 'text-danger'"
+          style="float:right">{{ metrics.att.down | number:'1.2-2' }}</span><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span style="float:left"><b>PWR up:</b></span><span
+          [ngClass]="metrics.power.up > 50 ? 'text-success' : 'text-danger'"
+          style="float:right">{{ metrics.power.up | number:'1.2-2' }}</span><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span style="float:left"><b>PWR dw:</b></span><span
+          [ngClass]="metrics.power.down > 50 ? 'text-success' : 'text-danger'"
+          style="float:right">{{ metrics.power.down | number:'1.2-2' }}</span><br>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-6">
+    <ngx-devices-metrics-chart-updater></ngx-devices-metrics-chart-updater>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <button nbButton (click)="reload()" class="float-right" status="primary" [(nbSpinner)]="loading">Recargar</button>
+  </div>
+</div>

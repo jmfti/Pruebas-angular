@@ -22,10 +22,16 @@ import {
 import { DevicesListComponent } from './devices-list/devices-list.component';
 import { DevicesProfileComponent } from './devices-profile/devices-profile.component';
 import { DevicesWifiComponent } from './devices-wifi/devices-wifi.component';
+import {DevicesMetricsComponent} from "./devices-metrics/devices-metrics.component";
+import {DevicesMetricsChartUpdaterComponent} from "./devices-metrics/devices-metrics-chart-updater.component";
+
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 
 @NgModule({
-  declarations: [DevicesComponent, DevicesSearchComponent, DevicesListComponent, DevicesProfileComponent, DevicesWifiComponent],
+  declarations: [DevicesComponent, DevicesSearchComponent, DevicesListComponent, DevicesProfileComponent, DevicesWifiComponent, DevicesMetricsComponent, DevicesMetricsChartUpdaterComponent],
   imports: [
     CommonModule,
     DevicesRoutingModule,
@@ -47,6 +53,7 @@ import { DevicesWifiComponent } from './devices-wifi/devices-wifi.component';
     NbTabsetModule,
     NbToggleModule,
     NbPopoverModule,
+    NgxChartsModule,
   ],
 })
 export class DevicesModule {
