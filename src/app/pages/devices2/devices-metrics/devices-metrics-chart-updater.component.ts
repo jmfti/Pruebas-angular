@@ -4,7 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 @Component({
   selector: 'ngx-devices-metrics-chart-updater',
   template: `
-    <nb-select multiple placeholder="Metrics" [(ngModel)]="selectedItems" (selectedChange)="selectedChanged($event)">
+    <nb-select style="float:left" multiple placeholder="Metrics" [(ngModel)]="selectedItems" (selectedChange)="selectedChanged($event)">
       <nb-option value="SNR UP">SNR UP</nb-option>
       <nb-option value="SNR DW">SNR DW</nb-option>
       <nb-option value="ATT UP">ATT UP</nb-option>
@@ -12,6 +12,13 @@ import { NbThemeService } from '@nebular/theme';
       <nb-option value="PWR UP">PWR UP</nb-option>
       <nb-option value="PWR DW">PWR DW</nb-option>
     </nb-select>
+    <nb-toggle status="primary" [(checked)]="enableMonitoring" (change)="this.updateInterval()">{{ enableMonitoring ? 'update' : 'not update'}}</nb-toggle>
+    <br>
+    <input nbInput status="info" placeholder="100-10000" [(ngModel)]="intervalInput" (keyup)="intervalChange($event)">
+<!--    <mv-slider [(value)]="value" [min]="1" [max]="100" [enabled]="enabled" (change)="change()"></mv-slider>-->
+
+
+
     <ngx-charts-line-chart
       [scheme]="colorScheme"
       [results]="multi"
@@ -22,14 +29,15 @@ import { NbThemeService } from '@nebular/theme';
       [showYAxisLabel]="showYAxisLabel"
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
-      animations="true"
+      animations="false"
     legendPosition="below">
     </ngx-charts-line-chart>
-    <nb-toggle status="primary" [(checked)]="enableMonitoring" >{{ enableMonitoring ? 'update' : 'not update'}}</nb-toggle>
+
   `,
 })
 export class DevicesMetricsChartUpdaterComponent implements OnDestroy {
   selectedItems = [];
+  interval = 1000;
   multi = [
   ];
   allData = {
@@ -100,6 +108,9 @@ export class DevicesMetricsChartUpdaterComponent implements OnDestroy {
   themeSubscription: any;
   enableMonitoring = false;
 
+  timerId: any;
+  intervalInput = 1000;
+
   constructor(private theme: NbThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
@@ -107,7 +118,54 @@ export class DevicesMetricsChartUpdaterComponent implements OnDestroy {
         domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
       };
     });
-    setInterval(() => {
+
+
+  }
+
+  updateData(): void {
+    if (!this.enableMonitoring){
+      return;
+    }
+    // this.met.snr.up = 2 * Math.sin(200 * (Date.now() / 1000)) + 15;
+    // this.met.snr.down = 2 * Math.sin(215 * (Date.now() / 1000)) + 17;
+    // this.met.att.up = 2 * Math.sin(190 * (Date.now() / 1000)) + 5;
+    // this.met.att.down = 2 * Math.sin(213 * (Date.now() / 1000)) + 9;
+    // this.met.power.up = 2 * Math.sin(201 * (Date.now() / 1000)) + 75;
+    // this.met.power.down = 2 * Math.sin(203 * (Date.now() / 1000)) + 80;
+
+    this.allData["SNR UP"].series = [...this.allData["SNR UP"].series, { name: Date.now(), value: 2 * Math.sin(200 * (Date.now() / 1000)) + 15}].slice(-100);
+    this.allData["SNR DW"].series = [...this.allData["SNR DW"].series, { name: Date.now(), value: 2 * Math.sin(215 * (Date.now() / 1000)) + 17}].slice(-100);
+    this.allData["ATT UP"].series = [...this.allData["ATT UP"].series, { name: Date.now(), value: 2 * Math.sin(190 * (Date.now() / 1000)) + 5}].slice(-100);
+    this.allData["ATT DW"].series = [...this.allData["ATT DW"].series, { name: Date.now(), value: 2 * Math.sin(213 * (Date.now() / 1000)) + 9}].slice(-100);
+    this.allData["PWR UP"].series = [...this.allData["PWR UP"].series, { name: Date.now(), value: 2 * Math.sin(201 * (Date.now() / 1000)) + 75}].slice(-100);
+    this.allData["PWR DW"].series = [...this.allData["PWR DW"].series, { name: Date.now(), value: 2 * Math.sin(203 * (Date.now() / 1000)) + 80}].slice(-100);
+
+    // this.selectedChanged(this.selectedItems);
+  }
+
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
+
+  selectedChanged(event){
+    this.multi = [];
+    for(let item of event){
+      // console.log(this.allData[item]);
+      this.multi = [...this.multi, this.allData[item]];
+    }
+  }
+
+  intervalChange(event){
+    console.log(event);
+    if (100 <= this.intervalInput && this.intervalInput <= 10000) {
+      this.interval = this.intervalInput;
+      this.updateInterval();
+    }
+  }
+
+  updateInterval(): void{
+    clearInterval(this.timerId);
+    this.timerId = setInterval(() => {
       if (!this.enableMonitoring)
         return;
       // this.met.snr.up = 2 * Math.sin(200 * (Date.now() / 1000)) + 15;
@@ -117,29 +175,16 @@ export class DevicesMetricsChartUpdaterComponent implements OnDestroy {
       // this.met.power.up = 2 * Math.sin(201 * (Date.now() / 1000)) + 75;
       // this.met.power.down = 2 * Math.sin(203 * (Date.now() / 1000)) + 80;
 
-      this.allData["SNR UP"].series = [...this.allData["SNR UP"].series, { name: Date.now(), value: 2 * Math.sin(200 * (Date.now() / 1000)) + 15}];
-      this.allData["SNR DW"].series = [...this.allData["SNR DW"].series, { name: Date.now(), value: 2 * Math.sin(215 * (Date.now() / 1000)) + 17}];
-      this.allData["ATT UP"].series = [...this.allData["ATT UP"].series, { name: Date.now(), value: 2 * Math.sin(190 * (Date.now() / 1000)) + 5}];
-      this.allData["ATT DW"].series = [...this.allData["ATT DW"].series, { name: Date.now(), value: 2 * Math.sin(213 * (Date.now() / 1000)) + 9}];
-      this.allData["PWR UP"].series = [...this.allData["PWR UP"].series, { name: Date.now(), value: 2 * Math.sin(201 * (Date.now() / 1000)) + 75}];
-      this.allData["PWR DW"].series = [...this.allData["PWR DW"].series, { name: Date.now(), value: 2 * Math.sin(203 * (Date.now() / 1000)) + 80}];
+      this.allData["SNR UP"].series = [...this.allData["SNR UP"].series, { name: Date.now(), value: 2 * Math.sin(200 * (Date.now() / 1000)) + 15}].slice(-100);
+      this.allData["SNR DW"].series = [...this.allData["SNR DW"].series, { name: Date.now(), value: 2 * Math.sin(215 * (Date.now() / 1000)) + 17}].slice(-100);
+      this.allData["ATT UP"].series = [...this.allData["ATT UP"].series, { name: Date.now(), value: 2 * Math.sin(190 * (Date.now() / 1000)) + 5}].slice(-100);
+      this.allData["ATT DW"].series = [...this.allData["ATT DW"].series, { name: Date.now(), value: 2 * Math.sin(213 * (Date.now() / 1000)) + 9}].slice(-100);
+      this.allData["PWR UP"].series = [...this.allData["PWR UP"].series, { name: Date.now(), value: 2 * Math.sin(201 * (Date.now() / 1000)) + 75}].slice(-100);
+      this.allData["PWR DW"].series = [...this.allData["PWR DW"].series, { name: Date.now(), value: 2 * Math.sin(203 * (Date.now() / 1000)) + 80}].slice(-100);
 
       // console.log(this.allData["SNR UP"]);
       this.selectedChanged(this.selectedItems);
-    }, 1000);
-  }
+    }, this.interval);
 
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
-  }
-
-  selectedChanged(event){
-    // console.log(event);
-    this.multi = [];
-    for(let item of event){
-      // console.log(this.allData[item]);
-      this.multi = [...this.multi, this.allData[item]];
-    }
-    // console.log(this.multi);
   }
 }

@@ -1,5 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {DevicesService} from "../../../@core/utils/devices.service";
+import {NbThemeService} from "@nebular/theme";
+import {takeWhile} from "rxjs/operators";
 
 
 @Component({
@@ -17,9 +19,20 @@ export class DevicesMetricsComponent implements OnInit {
 
   @Input()
   private cpe;
+  humidity: any;
+  humidityOff: any;
+
+  theme: any;
+  themeSubscription: any;
+  alive: boolean;
 
 
-  constructor(private devicesService: DevicesService) {
+  constructor(private devicesService: DevicesService, private themeService: NbThemeService) {
+    this.themeService.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(config => {
+        this.theme = config.variables.temperature;
+      });
   }
 
   ngOnInit(): void {

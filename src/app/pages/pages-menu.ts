@@ -11,15 +11,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'FEATURES',
     group: true,
   },
+  // {
+  //   title: 'Devices',
+  //   link: '/pages/devices',
+  //
+  // },
   {
     title: 'Devices',
-    link: '/pages/devices',
-    
-  },
-  {
-    title: 'Devices2',
     link: '/pages/devices2',
-    
+
   },
   {
     title: 'Troubleshooting',

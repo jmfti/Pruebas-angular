@@ -27,7 +27,7 @@ import {DevicesMetricsChartUpdaterComponent} from "./devices-metrics/devices-met
 
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import {NgxBootstrapSliderModule} from "ngx-bootstrap-slider";
 
 
 @NgModule({
@@ -54,6 +54,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NbToggleModule,
     NbPopoverModule,
     NgxChartsModule,
+    NgxBootstrapSliderModule,
   ],
 })
 export class DevicesModule {
