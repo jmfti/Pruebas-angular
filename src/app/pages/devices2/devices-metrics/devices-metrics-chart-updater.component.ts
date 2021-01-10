@@ -4,17 +4,25 @@ import { NbThemeService } from '@nebular/theme';
 @Component({
   selector: 'ngx-devices-metrics-chart-updater',
   template: `
-    <nb-select style="float:left" multiple placeholder="Metrics" [(ngModel)]="selectedItems" (selectedChange)="selectedChanged($event)">
-      <nb-option value="SNR UP">SNR UP</nb-option>
-      <nb-option value="SNR DW">SNR DW</nb-option>
-      <nb-option value="ATT UP">ATT UP</nb-option>
-      <nb-option value="ATT DW">ATT DW</nb-option>
-      <nb-option value="PWR UP">PWR UP</nb-option>
-      <nb-option value="PWR DW">PWR DW</nb-option>
-    </nb-select>
-    <nb-toggle status="primary" [(checked)]="enableMonitoring" (change)="this.updateInterval()">{{ enableMonitoring ? 'update' : 'not update'}}</nb-toggle>
-    <br>
-    <input nbInput status="info" placeholder="100-10000" [(ngModel)]="intervalInput" (keyup)="intervalChange($event)">
+    <div class="row">
+      <div class="col-md-12">
+        <nb-select style="float:left" multiple placeholder="Metrics" [(ngModel)]="selectedItems" (selectedChange)="selectedChanged($event)">
+          <nb-option value="SNR UP">SNR UP</nb-option>
+          <nb-option value="SNR DW">SNR DW</nb-option>
+          <nb-option value="ATT UP">ATT UP</nb-option>
+          <nb-option value="ATT DW">ATT DW</nb-option>
+          <nb-option value="PWR UP">PWR UP</nb-option>
+          <nb-option value="PWR DW">PWR DW</nb-option>
+        </nb-select>
+        <nb-toggle style="float:right" status="primary" [(checked)]="enableMonitoring" (change)="this.updateInterval()">{{ enableMonitoring ? 'update' : 'not update'}}</nb-toggle>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <input type="range" min="100" max="10000" step="1" [(ngModel)]="intervalInput" (mouseup)="intervalChange($event)"> {{ intervalInput }}
+      </div>
+    </div>
+<!--    <input nbInput status="info" placeholder="100-10000" [(ngModel)]="intervalInput" (keyup)="intervalChange($event)">-->
 <!--    <mv-slider [(value)]="value" [min]="1" [max]="100" [enabled]="enabled" (change)="change()"></mv-slider>-->
 
 
