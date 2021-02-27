@@ -78,4 +78,13 @@ export class DevicesService {
   //
   //
   // }
+  async getLogs(cpe: any) {
+    let res = this.http.post(environment.deviceServiceUri + '/getLogs',
+      {
+        'serialNumber': cpe.serialNumber,
+        macAddress: '',
+        serviceId: '',
+      }).toPromise();
+    return res;
+  }
 }

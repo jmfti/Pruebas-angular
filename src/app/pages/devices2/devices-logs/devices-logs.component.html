@@ -1,0 +1,9 @@
+<nb-card status="primary">
+  <nb-card-header>
+    <input nbInput placeholder="search..." (keyup)="search()" [(ngModel)]="searchInput">
+  </nb-card-header>
+  <nb-card-body>
+    {{ output }}
+  </nb-card-body>
+  <nb-card-footer>By Wikipedia</nb-card-footer>
+</nb-card>

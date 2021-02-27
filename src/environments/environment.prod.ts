@@ -5,4 +5,5 @@
  */
 export const environment = {
   production: true,
+  deviceServiceUri: "http://localhost:4200/devices",
 };

@@ -7,7 +7,7 @@
       <nb-card-header>Wifi configuration</nb-card-header>
       <nb-card-body>
         <div class="row">
-          <div class="col-md-1">Wifi name</div><div class="col-md-5"><input type="text" nbInput [(ngModel)]="wifiName" fullWidth=true/> </div>
+          <div class="col-md-1">Wifi name</div><div class="col-md-5"><input type="text" nbInput [(ngModel)]="wifiName" (keyup)="validateData()" fullWidth=true/> </div>
           <div class="col-md-1">Encryption</div>
           <div class="col-md-5">
             <nb-select [selected]="encrypt">
@@ -15,12 +15,17 @@
               <nb-option value="WPA-PSK2">WPA-PSK2</nb-option>
             </nb-select>
           </div>
-          <div class="col-md-1">Password</div><div class="col-md-5"><input type="password" nbInput [(ngModel)]="password" fullWidth=true/> </div>
+          <div class="col-md-1">Password</div><div class="col-md-5"><input type="password" nbInput [(ngModel)]="password" (keyup)="validateData()" fullWidth=true/> </div>
         </div>
       </nb-card-body>
       <nb-card-footer>
+        <div style="col-md-4">
+          <div class="float-left" [(status)]="validationStatus">
+
+          </div>
+        </div>
         <div style="float:right">
-          <button nbButton status="primary" (click)="send()">Send</button>
+          <button nbButton [status]="validationStatus" (click)="send()">Send</button>
         </div>
       </nb-card-footer>
     </nb-card>

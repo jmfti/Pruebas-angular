@@ -28,10 +28,11 @@ import {DevicesMetricsChartUpdaterComponent} from "./devices-metrics/devices-met
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {NgxBootstrapSliderModule} from "ngx-bootstrap-slider";
+import { DevicesLogsComponent } from './devices-logs/devices-logs.component';
 
 
 @NgModule({
-  declarations: [DevicesComponent, DevicesSearchComponent, DevicesListComponent, DevicesProfileComponent, DevicesWifiComponent, DevicesMetricsComponent, DevicesMetricsChartUpdaterComponent],
+  declarations: [DevicesComponent, DevicesSearchComponent, DevicesListComponent, DevicesProfileComponent, DevicesWifiComponent, DevicesMetricsComponent, DevicesMetricsChartUpdaterComponent, DevicesLogsComponent],
   imports: [
     CommonModule,
     DevicesRoutingModule,
